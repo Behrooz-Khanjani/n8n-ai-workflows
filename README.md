@@ -1,87 +1,118 @@
 # 🤖 Feedback AI Automation System (n8n)
 
-An autonomous, production-ready AI workflow built with **n8n** to analyze website feedback and take intelligent actions automatically.
+A **production-ready AI workflow** built with **n8n** that automatically analyzes website feedback and takes action — no manual review required.
 
-This is not a chatbot.  
-This is an **agentic AI system**.
-
----
-
-## 🧩 What This Workflow Does
-
-This workflow automatically:
-
-• Receives website feedback via a form  
-• Thinks step-by-step using an AI Agent  
-• Analyzes sentiment and intent  
-• Decides the next action autonomously  
-• Sends emails and notifications without human input  
+This project demonstrates how **AI Agents** can replace repetitive human workflows using real automation logic.
 
 ---
 
-## 🖼️ Workflow Overview
+## 🚀 What This Workflow Does
 
-![Feedback AI Automation System](./workflow.png)
+When a user submits feedback on a website form, the system automatically:
 
----
+1. Receives the feedback (Trigger)
+2. Analyzes sentiment and intent using an AI Agent
+3. Processes and structures the AI output
+4. Routes the result based on sentiment
+5. Sends notifications and stores data
 
-## ⚙️ Workflow Components
-
-• **Form Trigger** – Entry point for user feedback  
-• **AI Agent + Think Node** – Core reasoning and decision-making  
-• **Google Gemini** – Language model for analysis  
-• **JavaScript Logic Node** – Output normalization and validation  
-• **Filter Node** – Sentiment-based branching  
-• **Gmail & Slack** – Automated notifications  
+All steps run **fully automated**.
 
 ---
 
-## 🧠 Technologies Used
+## 🧠 Workflow Overview
 
-- n8n
-- Google Gemini
-- AI Agent + Think Node
-- JavaScript (Logic Node)
-- Webhooks
-- Gmail
-- Slack
-- Google Sheets (optional / extensible)
+![Feedback AI Automation Workflow](./workflow.png)
+
+> Dark-mode n8n workflow showing an AI-powered feedback automation system.
 
 ---
 
-## 📦 How to Use
+## 🧩 Nodes Breakdown
 
-1. Download the workflow JSON file  
-2. Import it into your n8n instance  
-3. Configure API credentials (Gemini, Gmail, Slack)  
-4. Activate the workflow  
+### 1️⃣ Form / Webhook Trigger
+- Entry point for website feedback
+- Captures user name, email, and message
 
-That’s it. 🚀
+### 2️⃣ AI Agent (Core Logic)
+- Understands user intent
+- Detects sentiment (positive / neutral / negative)
+- Decides what action to take
+
+> This is **not a chatbot** — this is an **agentic system**.
+
+### 3️⃣ LLM (Google Gemini / OpenAI / Claude)
+- Provides reasoning and language understanding
+- Powers all AI decisions
+
+### 4️⃣ JavaScript Logic Node
+- Parses AI output
+- Normalizes structured data
+- Ensures predictable downstream behavior
+
+### 5️⃣ Filter Node
+- Routes workflow based on sentiment or urgency
+
+### 6️⃣ Action Nodes
+- 📧 Email notification
+- 💬 Slack alert
+- 📊 Google Sheets logging (optional)
+
+---
+
+## 📦 Files Included
+
+| File | Description |
+|-----|------------|
+| `feedback-ai-automation.json` | Complete n8n workflow export |
+| `workflow.png` | Visual overview of the workflow |
+| `README.md` | Project documentation |
+
+---
+
+## ⚙️ How to Use
+
+1. Clone this repository
+2. Open **n8n**
+3. Import `feedback-ai-automation.json`
+4. Set your API keys:
+   - LLM (Gemini / OpenAI / Claude)
+   - Gmail / Slack (optional)
+5. Activate the workflow
+
+✅ Ready for production use.
 
 ---
 
 ## 🌍 Use Cases
 
-- SaaS customer feedback automation  
-- Website contact form processing  
-- Customer support triage  
-- Sentiment-based alerting systems  
+- SaaS products
+- E-commerce websites
+- Landing pages
+- Personal portfolios
+- Support feedback systems
 
 ---
 
 ## ⭐ Why This Matters
 
-Most people use AI to chat.  
-This workflow uses AI to **think and act**.
+- No manual feedback review
+- Faster response times
+- Scalable automation
+- Clear example of **Agentic AI**
 
-It replaces manual feedback review with autonomous decision-making.
+> **Stop reading feedback.  
+Let AI do the work.**
 
 ---
 
-## 📁 Files in This Repository
+## 👤 Author
 
-```text
-.
-├── feedback-ai-automation.json
-├── workflow.png
-└── README.md
+**Behrouz Khanjani**  
+AI Automation & n8n Workflows
+
+---
+
+## 📜 License
+
+MIT License – free to use, modify, and deploy.
