@@ -1,0 +1,460 @@
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Your Voice, Our Improvement",
+        "formDescription": "We’re improving our website—share your thoughts.",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "Name",
+              "fieldLabel": "Full Name",
+              "placeholder": "e.g. John Smith",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "e.g. john@example.com",
+              "requiredField": true
+            },
+            {
+              "fieldName": "customer_status",
+              "fieldLabel": "Are you currently a customer of our website?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldName": "source",
+              "fieldLabel": "How did you hear about our website?",
+              "fieldType": "checkbox",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Google Search"
+                  },
+                  {
+                    "option": "Social Media"
+                  },
+                  {
+                    "option": "Friend or Referral"
+                  },
+                  {
+                    "option": "Advertisement"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldName": "feedback",
+              "fieldLabel": "Your Feedback",
+              "fieldType": "textarea",
+              "placeholder": "Write your comments, suggestions, or experience here…",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "Submit Feedback",
+          "path": "website-feedback",
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Thank you! Your feedback has been submitted successfully."
+            }
+          },
+          "ignoreBots": true,
+          "useWorkflowTimezone": true,
+          "customCss": "=:root {\n\t/* Typography */\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\n\t--font-size-body: 13px;\n\t--font-size-label: 14px;\n\t--font-size-input: 14px;\n\t--font-size-paragraph: 15px;\n\t--font-size-header: 22px;\n\t--font-size-subheader: 14px;\n\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\n\t--font-size-html-h1: 32px;\n\t--font-size-html-h2: 24px;\n\t--font-size-html-h3: 18px;\n\t--font-size-html-h4: 15px;\n\t--font-size-html-h5: 13px;\n\t--font-size-html-h6: 11px;\n\n\t/* Backgrounds – warm & elegant */\n\t--color-background: #faf7f2;\n\n\t--color-card-bg: #fdfbf7;\n\t--color-card-border: #e6e0d6;\n\t--color-card-shadow: rgba(0, 0, 0, 0.04);\n\n\t/* Text */\n\t--color-header: #2b2a28;\n\t--color-header-subtext: #7a756d;\n\n\t--color-label: #3f3e3b;\n\t--color-input-text: #5c5a55;\n\t--color-input-border: #d8d2c7;\n\n\t--color-focus-border: #c9a45c; /* gold focus */\n\n\t/* Links */\n\t--color-link: #8a847b;\n\t--color-html-link: #c9a45c;\n\n\t/* Primary Action (Submit Button) */\n\t--color-submit-btn-bg: #c9a45c;          /* gold */\n\t--color-submit-btn-text: #2b2a28;        /* dark text */\n\n\t/* Required / Errors */\n\t--color-required: #c9a45c;\n\t--color-error: #b0483f;\n\n\t/* Notices */\n\t--color-test-notice-text: #9c7b3c;\n\t--color-test-notice-bg: #fbf6ea;\n\t--color-test-notice-border: #e6d6b5;\n\n\t--color-clear-button-bg: #9b958a;\n\t--color-html-text: #3f3e3b;\n\n\t/* Border Radius – soft luxury */\n\t--border-radius-input: 10px;\n\t--border-radius-card: 12px;\n\t--card-border-radius: 12px;\n\t--border-radius-clear-btn: 50%;\n\n\t/* Spacing – editorial breathing */\n\t--padding-container-top: 40px;\n\t--padding-card: 32px;\n\t--card-padding: 32px;\n\n\t--padding-form-input: 14px;\n\t--margin-bottom-card: 20px;\n\t--card-margin-bottom: 20px;\n\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\n\t/* Layout */\n\t--container-width: 460px;\n\t--submit-btn-height: 52px;\n\t--checkbox-size: 18px;\n\n\t/* Effects */\n\t--box-shadow-card: 0px 10px 30px rgba(0, 0, 0, 0.06);\n\t--opacity-placeholder: 0.45;\n}\n"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -224,
+        -96
+      ],
+      "id": "bc18a6d5-3384-44ea-811b-3b7126de0807",
+      "name": "Form",
+      "webhookId": "f6991aec-a9c1-427a-bd10-7952e271a49d"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You have received a new website feedback submission.\n\nUser details:\n- Name: {{ $json.Name }}\n- Email: {{ $json.email }}\n- Is Customer: {{ $json.customer_status }}\n- Feedback Text: {{ $json.feedback }}\n\nYour tasks:\n\n1) Analyze the sentiment of the feedback:\n   - If the overall sentiment is positive, classify it as \"+\"\n   - If the overall sentiment is negative or frustrated, classify it as \"-\"\n\n2) Write a short, human-friendly summary of the user’s experience.\n\n3) Prepare structured data for Google Sheets.\n\n4) Write a warm, personal email reply on behalf of Behrooz Khanjani.\n\nIMPORTANT OUTPUT RULES (STRICT):\n- Return ONLY valid JSON.\n- The output MUST be a JSON Array containing a single object `[...]`.\n- For the email body, use HTML formatting tags (<br> for line breaks) instead of \\n.\n- Do NOT use markdown.\n- Do NOT include explanations.\n- The output must match EXACTLY this structure:\n\n[\n  {\n    \"sentiment\": \"+ or -\",\n    \"summary\": \"short experience summary\",\n    \"sheet\": {\n      \"name\": \"full name\",\n      \"email\": \"email address\",\n      \"experience\": \"short experience summary\",\n      \"sentiment\": \"+ or -\"\n    },\n    \"email\": {\n      \"subject\": \"email subject line\",\n      \"body\": \"Dear Behrooz,<br><br>Thank you so much...<br><br>With warmth,<br>Behrooz\"\n    }\n  }\n]",
+        "options": {
+          "systemMessage": "You are an empathetic and thoughtful assistant representing Behrooz Khanjani.\n\nBehrooz Khanjani is the author of the personal essay “My Last Morning as a Ghost.”\nHis values are rooted in presence, intentional living, gratitude, and meaningful human connection.\n\nYou always communicate on Behrooz’s behalf with warmth, humility, clarity, and sincerity.\nYour tone must feel human, calm, and personal — never corporate, robotic, or promotional.\n\nCore behavior rules:\n- Treat every feedback submission as a meaningful human interaction.\n- Always acknowledge the person by name.\n- Always appreciate the time and attention they gave.\n- If feedback is positive, express genuine gratitude and quiet happiness.\n- If feedback is negative or critical, respond with empathy and reassurance.\n- When feedback is negative, clearly state it will be reviewed and shared with management.\n- Never argue, dismiss, or minimize feedback.\n- Never mention automation, AI, systems, workflows, or internal processes.\n- End every message with warmth and appreciation.\n\nYou are continuing a human conversation, not generating generic responses.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        16,
+        -32
+      ],
+      "id": "21aaea4b-d79c-4b38-af19-04c13c0be968",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        272
+      ],
+      "id": "24803e84-2ef2-42b0-a522-87eb9a891716",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "2ZEmxLUKwVAF90NV",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Document', ``, 'string') }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Sheet', ``, 'string') }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -64,
+        400
+      ],
+      "id": "81c870c5-3aea-4bf9-9b05-dcd503c0e4e3",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "BGwCf7VHM5hkPS8W",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// دریافت خروجی از نود قبلی (AI Agent)\n// فرض بر این است که خروجی متن در فیلدی به نام 'output' یا 'text' است.\n// اگر نام فیلد شما فرق دارد، آن را در خط پایین تغییر دهید.\nconst aiOutput = $input.item.json.output || $input.item.json.text || JSON.stringify($input.item.json);\n\n// پیدا کردن بخش JSON (چیزی که بین [ و ] است)\nconst jsonMatch = aiOutput.match(/\\[[\\s\\S]*\\]/);\n\nif (jsonMatch) {\n  try {\n    // تبدیل متن به داده واقعی (Parse)\n    const parsedData = JSON.parse(jsonMatch[0]);\n    \n    // برگرداندن داده به صورت استاندارد n8n\n    return parsedData;\n  } catch (error) {\n    // اگر جیسون خراب بود\n    return { error: \"Error parsing JSON\", details: error.message };\n  }\n} else {\n  // اگر اصلا جیسونی پیدا نشد\n  return { error: \"No JSON array found in output\" };\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        592,
+        -96
+      ],
+      "id": "4f6f0cf2-933d-485b-a0c5-e2ffaef55b76",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "description": " "
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        144
+      ],
+      "id": "62f7bfb9-0b09-4ca4-a41d-156f2c17740d",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "content": "## 🎯 Entry Point \n( Website Form Trigger)\n\n\n\n\n\n\n\n\nThis workflow starts when a user submits a website feedback form.\n\nCollected data:\n• User name\n• Email\n• Customer status\n• Feedback message\n",
+        "height": 352,
+        "width": 336,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -432,
+        -128
+      ],
+      "typeVersion": 1,
+      "id": "460f191d-3f07-47f6-b5b3-2cd68c0ec718",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## 🤖 AI Agent – Core Decision Maker\n\nThis is an agentic system that THINKS and ACTS.",
+        "height": 688,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "64aa9d19-1afa-4bcc-88d0-283d3dea379f",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "##🧠 LLM Brain – Google Gemini\n\n\n\n\n\n\n\n\n\n\n\n\nGemini is used as the reasoning engine for the AI Agent.\n\n",
+        "height": 256,
+        "width": 336,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -432,
+        224
+      ],
+      "typeVersion": 1,
+      "id": "ae061788-ed75-47eb-bb05-1682ff79faf1",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -64,
+        288
+      ],
+      "id": "60724845-e257-4b85-b045-b48eafe4376c",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## 🗂️ Agent Memory\n",
+        "height": 80,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        64,
+        288
+      ],
+      "typeVersion": 1,
+      "id": "4bb0f861-f0db-4220-abdf-7f5fdf8ca6bd",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## 🧰 External Tool – Google Sheets ",
+        "height": 80,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        64,
+        416
+      ],
+      "typeVersion": 1,
+      "id": "3f106897-2567-4191-877b-3a90eb6a3511",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## ⚙️ Logic Layer – JavaScript Processing\n\n\n\n\n\n\n\n\nThis node transforms the AI output into a structured format.\n\nTasks:\n• Parse AI response\n• Extract key fields (sentiment, urgency, action)\n• Prepare clean data for downstream services\n\nThis ensures reliability and predictable outputs.\n",
+        "height": 400,
+        "width": 416,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        336,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "f08deccf-39e7-4d5a-a46b-3040d32127e1",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.sheet.email }}",
+        "subject": "={{ $json.email.subject }}",
+        "message": "={{ $json.email.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        624,
+        352
+      ],
+      "id": "0450cd56-6a77-491a-b35d-38ce583fecf8",
+      "name": "Send a message",
+      "webhookId": "e6ef64fd-3c39-4102-bf52-1a6f14608847",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "gp8F2y09saNLJtc6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 📨 Action Node(Email Notification)\n\nBased on the AI agent’s decision:\n• Sends an email alert\n• Notifies the responsible team\n• Speeds up response time\n\nNo human intervention required.\nFully automated.",
+        "height": 272,
+        "width": 416
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        336,
+        256
+      ],
+      "typeVersion": 1,
+      "id": "b62767c1-25ec-4eb6-9823-8ca70c066e56",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## 🧠 Think Node \n",
+        "height": 80,
+        "width": 224,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        64,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "95d374e4-719d-4352-9894-54ac44a5d126",
+      "name": "Sticky Note7"
+    }
+  ],
+  "pinData": {
+    "Form": [
+      {
+        "json": {
+          "Name": "behrooz khanjani",
+          "email": "behroozkhanjani@gmail.com",
+          "customer_status": "Yes",
+          "source": [
+            "Google Search",
+            "Social Media"
+          ],
+          "feedback": "you are good",
+          "submittedAt": "2025-12-31T13:19:31.890+03:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "0aea1d0c-f142-4b3f-acee-dec895aafa35",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bc3bf310ccad380a7dab1b3b26406acd55c7169107e6a853a56a451e6850de5e"
+  },
+  "id": "sNMW93bHAK9jvCpV",
+  "tags": []
+}
